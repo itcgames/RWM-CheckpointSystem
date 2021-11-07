@@ -158,6 +158,12 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "ie.itcarlow.checkpointsystem": {
+      "version": "file:ie.itcarlow.checkpointsytem",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

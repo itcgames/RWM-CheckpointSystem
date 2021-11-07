@@ -1,0 +1,145 @@
+Int Player Data 
+
+Player Level , 5
+Player Speed , 10
+
+Float Player Data 
+
+Player Xp , 145031
+Player Health , 48.5
+
+Vector2 Player Data
+
+Player Position , (25.6, 420.7)
+
+Int Game Data
+
+
+Float Game Data
+
+
+String Game Data
+
+Int Player Data 
+
+Player Level , 5
+Player Speed , 10
+
+Float Player Data 
+
+Player Xp , 145031
+Player Health , 48.5
+
+Vector2 Player Data
+
+Player Position , (25.6, 420.7)
+
+Int Game Data
+
+Game Level , 15
+
+Float Game Data
+
+Game Time Left , 14.01
+
+String Game Data
+
+Game Difficulty , Medium
+Int Player Data 
+
+Player Level , 5
+Player Speed , 10
+
+Float Player Data 
+
+Player Xp , 145031
+Player Health , 48.5
+
+Vector2 Player Data
+
+Player Position , (25.6, 420.7)
+
+Int Game Data
+
+
+Float Game Data
+
+
+String Game Data
+
+Int Player Data 
+
+
+Float Player Data 
+
+
+Vector2 Player Data
+
+
+Int Game Data
+
+
+Float Game Data
+
+
+String Game Data
+
+Int Player Data 
+
+
+Float Player Data 
+
+
+Vector2 Player Data
+
+
+Int Game Data
+
+Game Level , 15
+
+Float Game Data
+
+Game Time Left , 14.01
+
+String Game Data
+
+Game Difficulty , Medium
+Int Player Data 
+
+Player Level , 5
+Player Speed , 10
+
+Float Player Data 
+
+Player Xp , 145031
+Player Health , 48.5
+
+Vector2 Player Data
+
+Player Position , (25.6, 420.7)
+
+Int Game Data
+
+
+Float Game Data
+
+
+String Game Data
+
+Int Player Data 
+
+
+Float Player Data 
+
+
+Vector2 Player Data
+
+
+Int Game Data
+
+
+Float Game Data
+
+
+String Game Data
+
