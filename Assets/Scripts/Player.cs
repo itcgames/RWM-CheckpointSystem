@@ -26,20 +26,19 @@ public class Player : MonoBehaviour
 
         pos = new Vector2(25.6f, 420.69f);
 
-        t_system.AddPlayerData("Player Level", level);
-        t_system.AddPlayerData("Player Speed", speed);
-
-        t_system.AddPlayerData("Player Xp", xp);
-        t_system.AddPlayerData("Player Health", health);
-
-        t_system.AddPlayerData("Player Position", pos);
-
-        t_system.SaveData();
+        t_system.AddToIntList("Level", level);
+        t_system.AddToIntList("Speed", speed);
+        t_system.AddToFloatList("Xp", xp);
+        t_system.AddToFloatList("Health", health);
+        t_system.AddToVector2List("PLayer Position", pos);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            t_system.SaveDataToFile();
+        }
     }
 }

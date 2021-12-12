@@ -30,29 +30,30 @@ public class CheckpointSystemTest
 
         Vector2 pos = new Vector2(25.6f, 420.69f);
 
-        t_system.AddPlayerData("Player Level", level);
-        t_system.AddPlayerData("Player Speed", speed);
+        t_system.AddToIntList("Player Level", level);
+        t_system.AddToIntList("Player Speed", speed);
 
-        t_system.AddPlayerData("Player Xp", xp);
-        t_system.AddPlayerData("Player Health", health);
+        t_system.AddToFloatList("Player Xp", xp);
+        t_system.AddToFloatList("Player Health", health);
 
-        t_system.AddPlayerData("Player Position", pos);
-        t_system.SaveData();
+        t_system.AddToVector2List("Player Position", pos);
+        
+        t_system.SaveDataToFile();
 
         yield return new WaitForSeconds(0.1f);
 
-        Assert.AreEqual("Player Level", t_system.playerDataInt[0].name);
-        Assert.AreEqual(level, t_system.playerDataInt[0].data);
-        Assert.AreEqual("Player Speed", t_system.playerDataInt[1].name);
-        Assert.AreEqual(speed, t_system.playerDataInt[1].data);
+        Assert.AreEqual("Player Level", t_system.info.intList.name[0]);
+        Assert.AreEqual(level, t_system.info.intList.data[0]);
+        Assert.AreEqual("Player Speed", t_system.info.intList.name[1]);
+        Assert.AreEqual(speed, t_system.info.intList.data[1]);
 
-        Assert.AreEqual("Player Xp", t_system.playerDataFloat[0].name);
-        Assert.AreEqual(xp, t_system.playerDataFloat[0].data);
-        Assert.AreEqual("Player Health", t_system.playerDataFloat[1].name);
-        Assert.AreEqual(health, t_system.playerDataFloat[1].data);
+        Assert.AreEqual("Player Xp", t_system.info.floatList.name[0]);
+        Assert.AreEqual(xp, t_system.info.floatList.data[0]);
+        Assert.AreEqual("Player Health", t_system.info.floatList.name[1]);
+        Assert.AreEqual(health, t_system.info.floatList.data[1]);
 
-        Assert.AreEqual("Player Position", t_system.playerDataVec2[0].name);
-        Assert.AreEqual(pos, t_system.playerDataVec2[0].data);
+        Assert.AreEqual("Player Position", t_system.info.vector2List.name[0]);
+        Assert.AreEqual(pos, t_system.info.vector2List.data[0]);
 
     }
 
@@ -61,7 +62,7 @@ public class CheckpointSystemTest
     {
         CheckpointSystem t_system = new CheckpointSystem();
         t_system.Awake();
-        t_system.SaveData();
+        t_system.SaveDataToFile();
         string file = Application.dataPath + "playerData.txt";
         yield return new WaitForSeconds(0.1f);
 
@@ -80,24 +81,24 @@ public class CheckpointSystemTest
         string difficulty = "Medium";
 
 
-        t_system.AddGameData("Game Level", gameLevel);
+        t_system.AddToIntList("Game Level", gameLevel);
 
-        t_system.AddGameData("Game Time Left", timeLeft);
+        t_system.AddToFloatList("Game Time Left", timeLeft);
 
-        t_system.AddGameData("Game Difficulty", difficulty);
+        t_system.AddToStringList("Game Difficulty", difficulty);
 
-        t_system.SaveData();
+        t_system.SaveDataToFile();
 
         yield return new WaitForSeconds(0.1f);
 
-        Assert.AreEqual("Game Level", t_system.gameDataInt[0].name);
-        Assert.AreEqual(gameLevel, t_system.gameDataInt[0].data);
+        Assert.AreEqual("Game Level", t_system.info.intList.name[0]);
+        Assert.AreEqual(gameLevel, t_system.info.intList.data[0]);
 
-        Assert.AreEqual("Game Time Left", t_system.gameDataFloat[0].name);
-        Assert.AreEqual(timeLeft, t_system.gameDataFloat[0].data);
+        Assert.AreEqual("Game Time Left", t_system.info.floatList.name[0]);
+        Assert.AreEqual(timeLeft, t_system.info.floatList.data[0]);
 
-        Assert.AreEqual("Game Difficulty", t_system.gameDataString[0].name);
-        Assert.AreEqual(difficulty, t_system.gameDataString[0].data);
+        Assert.AreEqual("Game Difficulty", t_system.info.stringList.name[0]);
+        Assert.AreEqual(difficulty, t_system.info.stringList.data[0]);
 
     }
 }

@@ -23,13 +23,9 @@ public class Game : MonoBehaviour
 
         t_system = FindObjectOfType<CheckpointSystem>();
 
-        t_system.AddGameData("Game Level", gameLevel);
-
-        t_system.AddGameData("Game Time Left", timeLeft);
-
-        t_system.AddGameData("Game Difficulty", difficulty);
-
-        t_system.SaveData();
+        t_system.AddToStringList("Difficulty", difficulty);
+        t_system.AddToIntList("Game Level", gameLevel);
+        t_system.AddToFloatList("Time Left", timeLeft);
 
     }
 
