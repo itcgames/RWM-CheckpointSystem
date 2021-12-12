@@ -1,4 +1,4 @@
-{"name":[],"data":[]}
-{"name":[],"data":[]}
-{"name":[],"data":[]}
-{"name":[],"data":[]}
+{"name":["Player Level","Player Speed","Game Level"],"data":[5,10,15]}
+{"name":["Player Xp","Player Health","Game Time Left"],"data":[145031.046875,48.5,14.010000228881836]}
+{"name":["Game Difficulty"],"data":["Medium"]}
+{"name":["Player Position"],"data":[{"x":25.600000381469728,"y":420.69000244140627}]}

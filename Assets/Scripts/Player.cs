@@ -40,5 +40,19 @@ public class Player : MonoBehaviour
         {
             t_system.SaveDataToFile();
         }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            t_system.LoadData();
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            level = t_system.info.intList.data[0];
+            speed = t_system.info.intList.data[1];
+            xp = t_system.info.floatList.data[0];
+            health = t_system.info.floatList.data[1];
+            pos = t_system.info.vector2List.data[0];
+        }
     }
 }

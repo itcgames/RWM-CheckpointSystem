@@ -101,4 +101,90 @@ public class CheckpointSystemTest
         Assert.AreEqual(difficulty, t_system.info.stringList.data[0]);
 
     }
+
+    [UnityTest]
+    public IEnumerator ReadInfoFromFile()
+    {
+        CheckpointSystem t_system = new CheckpointSystem();
+        t_system.Awake();
+        int gameLevel = 15;
+
+        float timeLeft = 14.01f;
+
+        string difficulty = "Medium";
+
+        int level = 5;
+        int speed = 10;
+
+        float xp = 145031.05f;
+        float health = 48.5f;
+
+        Vector2 pos = new Vector2(25.6f, 420.69f);
+
+        t_system.AddToIntList("Player Level", level);
+        t_system.AddToIntList("Player Speed", speed);
+        t_system.AddToFloatList("Player Xp", xp);
+        t_system.AddToFloatList("Player Health", health);
+        t_system.AddToVector2List("Player Position", pos);
+        t_system.AddToIntList("Game Level", gameLevel);
+        t_system.AddToFloatList("Game Time Left", timeLeft);
+        t_system.AddToStringList("Game Difficulty", difficulty);
+        t_system.SaveDataToFile();
+
+        yield return new WaitForSeconds(0.1f);
+
+        t_system.LoadData();
+
+        yield return new WaitForSeconds(0.1f);
+
+        Assert.AreEqual(gameLevel, t_system.info.intList.data[2]);
+        Assert.AreEqual(timeLeft, t_system.info.floatList.data[2]);
+        Assert.AreEqual(difficulty, t_system.info.stringList.data[0]);
+        Assert.AreEqual(level, t_system.info.intList.data[0]);
+        Assert.AreEqual(speed, t_system.info.intList.data[1]);
+        Assert.AreEqual(xp, t_system.info.floatList.data[0]);
+        Assert.AreEqual(health, t_system.info.floatList.data[1]);
+        Assert.AreEqual(pos, t_system.info.vector2List.data[0]);
+
+    }
+
+    [UnityTest]
+    public IEnumerator AssignInfo()
+    {
+        CheckpointSystem t_system = new CheckpointSystem();
+        t_system.Awake();
+        int gameLevel = 15;
+        float timeLeft = 14.01f;
+        string difficulty = "Medium";
+        int level = 5;
+        int speed = 10;
+        float xp = 145031.05f;
+        float health = 48.5f;
+        Vector2 pos = new Vector2(25.6f, 420.69f);
+
+        t_system.LoadData();
+
+        yield return new WaitForSeconds(0.1f);
+
+        int actual_gameLevel = t_system.info.intList.data[2];
+        float actual_timeLeft = t_system.info.floatList.data[2];
+        string actual_difficulty = t_system.info.stringList.data[0];
+        int actual_level = t_system.info.intList.data[0];
+        int actual_speed = t_system.info.intList.data[1];
+        float actual_xp = t_system.info.floatList.data[0];
+        float actual_health = t_system.info.floatList.data[1];
+        Vector2 actual_pos = t_system.info.vector2List.data[0];
+
+        yield return new WaitForSeconds(0.1f);
+
+        Assert.AreEqual(gameLevel, actual_gameLevel);
+        Assert.AreEqual(timeLeft, actual_timeLeft);
+        Assert.AreEqual(difficulty, actual_difficulty);
+        Assert.AreEqual(level, actual_level);
+        Assert.AreEqual(speed, actual_speed);
+        Assert.AreEqual(xp, actual_xp);
+        Assert.AreEqual(health, actual_health);
+        Assert.AreEqual(pos, actual_pos);
+
+    }
 }

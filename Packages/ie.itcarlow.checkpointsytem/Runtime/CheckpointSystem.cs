@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using System.Linq;
 
 public class CheckpointSystem : MonoBehaviour
 {
@@ -26,18 +27,19 @@ public class CheckpointSystem : MonoBehaviour
     //save file location
     string filename;
     public Info info;
-    public ArrayList arrayList = new ArrayList();
+    ArrayList arrayList = new ArrayList();
+    List<string> fileLines;
 
     public void Awake()
     {
         filename = Application.dataPath + "playerData.txt";
         info = new Info();
+        fileLines = new List<string>();
 
         arrayList.Add(info.intList);
         arrayList.Add(info.floatList);
         arrayList.Add(info.stringList);
         arrayList.Add(info.vector2List);
-
     }
 
     public string fileLoc()
@@ -86,5 +88,17 @@ public class CheckpointSystem : MonoBehaviour
         }
 
         tw.Close();
+    }
+
+    public void LoadData()
+    {
+        fileLines = File.ReadAllLines(filename).ToList();
+
+        int i = 0;
+        foreach(string s in fileLines)
+        {
+            JsonUtility.FromJsonOverwrite(s, arrayList[i]);
+            i++;
+        }
     }
 }

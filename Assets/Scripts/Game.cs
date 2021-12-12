@@ -32,6 +32,11 @@ public class Game : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            gameLevel = t_system.info.intList.data[2];
+            timeLeft = t_system.info.floatList.data[2];
+            difficulty = t_system.info.stringList.data[0];
+        }
     }
 }
