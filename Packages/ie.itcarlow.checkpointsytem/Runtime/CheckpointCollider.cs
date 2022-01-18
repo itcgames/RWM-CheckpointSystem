@@ -11,7 +11,14 @@ public class CheckpointCollider : MonoBehaviour
 
     void Awake()
     {
-        t_checkpointSystem = FindObjectOfType<CheckpointSystem>();
+        if (FindObjectOfType<CheckpointSystem>() == null)
+        {
+            t_checkpointSystem = new CheckpointSystem();
+        }
+        else
+        {
+            t_checkpointSystem = FindObjectOfType<CheckpointSystem>();
+        }
     }
 
     void Update()

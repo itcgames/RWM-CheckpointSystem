@@ -70,3 +70,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ef3cc4cee20e5499d18782a505ac0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentCheckpointTime: 10
+  savePossible: 1
+  t_checkpointSystem: {fileID: 0}

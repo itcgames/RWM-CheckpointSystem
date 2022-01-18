@@ -37,7 +37,7 @@ public class CheckpointSystemTest
         t_system.AddToFloatList("Player Health", health);
 
         t_system.AddToVector2List("Player Position", pos);
-        
+
         t_system.SaveDataToFile();
 
         yield return new WaitForSeconds(0.1f);
