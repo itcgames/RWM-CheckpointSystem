@@ -187,4 +187,26 @@ public class CheckpointSystemTest
         Assert.AreEqual(pos, actual_pos);
 
     }
+
+    [UnityTest]
+    public IEnumerator PlayerEntersSaveArea()
+    {
+        CheckpointSystem t_system = new CheckpointSystem();
+        t_system.Awake();
+
+        GameObject m_worldCheckpoint = Resources.Load<GameObject>("WorldCheckpoint");
+
+        Assert.AreEqual(true, m_worldCheckpoint.GetComponent<CheckpointCollider>().savePossible);
+
+        GameObject m_testPlayer = Resources.Load<GameObject>("TestPlayer");
+
+        yield return new WaitForSeconds(0.1f);
+        m_testPlayer.transform.position = new Vector3(0, 0, 0);
+
+        m_worldCheckpoint.GetComponent<CheckpointCollider>().OnTriggerEnter2D(m_testPlayer.GetComponent<Collider2D>());
+
+        yield return new WaitForSeconds(0.1f);
+
+        Assert.AreEqual(false, m_worldCheckpoint.GetComponent<CheckpointCollider>().savePossible);
+    }
 }
