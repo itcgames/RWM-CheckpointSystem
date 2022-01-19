@@ -223,7 +223,7 @@ public class CheckpointSystemTest
     }
 
 
-        [UnityTest]
+    [UnityTest]
     public IEnumerator WorldCheckpointSaveActuallyWorks()
     {
         SceneManager.LoadScene(0);
@@ -255,5 +255,17 @@ public class CheckpointSystemTest
         Assert.AreEqual(xp, t_system.info.floatList.data[0]);
         Assert.AreEqual(health, t_system.info.floatList.data[1]);
         Assert.AreEqual(pos, t_system.info.vector2List.data[0]);
+    }
+
+    [UnityTest]
+    public IEnumerator SaveTheGameAfterXmin()
+    {
+        SceneManager.LoadScene(0);
+
+        yield return new WaitForSeconds(0.1f);
+        Assert.AreEqual(false, GameObject.FindObjectOfType<CheckpointSystem>().autoSave);
+
+        yield return new WaitForSecondsRealtime(20.0f);
+        Assert.AreEqual(2, GameObject.FindObjectOfType<CheckpointSystem>().timesSaved);
     }
 }

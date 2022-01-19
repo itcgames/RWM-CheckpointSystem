@@ -29,6 +29,12 @@ public class CheckpointSystem : MonoBehaviour
     public Info info;
     ArrayList arrayList = new ArrayList();
     List<string> fileLines;
+    bool autoSaveEnabled = true;
+
+    float autoSaveInterval = 10.0f;
+    float autoSaveTimeLeft;
+    public bool autoSave = false;
+    public int timesSaved = 0;
 
     public void Awake()
     {
@@ -40,6 +46,19 @@ public class CheckpointSystem : MonoBehaviour
         arrayList.Add(info.floatList);
         arrayList.Add(info.stringList);
         arrayList.Add(info.vector2List);
+    }
+
+    public void Start()
+    {
+        autoSaveTimeLeft = autoSaveInterval;
+    }
+
+    void Update()
+    {
+        if(autoSaveEnabled)
+        {
+            AutoSave();
+        }
     }
 
     public string fileLoc()
@@ -99,6 +118,32 @@ public class CheckpointSystem : MonoBehaviour
         {
             JsonUtility.FromJsonOverwrite(s, arrayList[i]);
             i++;
+        }
+    }
+
+    public void SetSaveTimeInterval(int mins)
+    {
+        autoSaveInterval = (mins * 60);
+    }
+
+    public void EnableAutoSave(bool enable)
+    {
+        autoSaveEnabled = enable;
+    }
+
+    void AutoSave()
+    {
+        if (autoSaveTimeLeft > 0.0f)
+        {
+            autoSaveTimeLeft -= Time.deltaTime;
+            autoSave = false;
+        }
+        else
+        {
+            autoSaveTimeLeft = autoSaveInterval;
+            autoSave = true;
+            timesSaved++;
+            SaveDataToFile();
         }
     }
 }

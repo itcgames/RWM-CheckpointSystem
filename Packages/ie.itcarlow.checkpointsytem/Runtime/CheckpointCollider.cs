@@ -39,7 +39,7 @@ public class CheckpointCollider : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision)
+        if(collision && savePossible)
         {
             savePossible = false;
             if (t_checkpointSystem != null)
