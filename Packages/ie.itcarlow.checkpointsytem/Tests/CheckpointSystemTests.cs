@@ -333,4 +333,61 @@ public class CheckpointSystemTest
 
         Assert.AreEqual(4, t_system.missionTimeSaved);
     }
+
+    [UnityTest]
+    public IEnumerator MissionSaveInfoIsCorrect()
+    {
+        SceneManager.LoadScene(0);
+
+        yield return new WaitForSeconds(0.1f);
+
+        CheckpointSystem t_system = GameObject.FindObjectOfType<CheckpointSystem>();
+
+        int gameLevel = 15;
+        float timeLeft = 14.01f;
+        string difficulty = "Medium";
+        int level = 5;
+        int speed = 10;
+        float xp = 145031.05f;
+        float health = 48.5f;
+        Vector2 pos = new Vector2(25.6f, 420.69f);
+
+        yield return new WaitForSeconds(0.1f);
+        t_system.TaskSaveInterval(2);
+        t_system.MissionTaskNum(7);
+        t_system.MissionInProgress(true);
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+
+        yield return new WaitForSeconds(0.1f);
+
+        Assert.AreEqual(4, t_system.missionTimeSaved);
+
+        yield return new WaitForSeconds(0.1f);
+
+        t_system.LoadData();
+
+        yield return new WaitForSeconds(0.1f);
+
+        Assert.AreEqual(gameLevel, t_system.info.intList.data[2]);
+        Assert.AreEqual(timeLeft, t_system.info.floatList.data[2]);
+        Assert.AreEqual(difficulty, t_system.info.stringList.data[0]);
+        Assert.AreEqual(level, t_system.info.intList.data[0]);
+        Assert.AreEqual(speed, t_system.info.intList.data[1]);
+        Assert.AreEqual(xp, t_system.info.floatList.data[0]);
+        Assert.AreEqual(health, t_system.info.floatList.data[1]);
+        Assert.AreEqual(pos, t_system.info.vector2List.data[0]);
+    }
 }
