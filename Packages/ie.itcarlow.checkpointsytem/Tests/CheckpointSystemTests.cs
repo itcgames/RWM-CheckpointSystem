@@ -302,4 +302,35 @@ public class CheckpointSystemTest
         Assert.AreEqual(health, t_system.info.floatList.data[1]);
         Assert.AreEqual(pos, t_system.info.vector2List.data[0]);
     }
+
+    [UnityTest]
+    public IEnumerator SaveGameAfterTasks()
+    {
+        SceneManager.LoadScene(0);
+        yield return new WaitForSeconds(0.1f);
+        CheckpointSystem t_system = GameObject.FindObjectOfType<CheckpointSystem>();
+
+        yield return new WaitForSeconds(0.1f);
+        t_system.TaskSaveInterval(2);
+        t_system.MissionTaskNum(7);
+        t_system.MissionInProgress(true);
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+
+        yield return new WaitForSeconds(0.1f);
+
+        Assert.AreEqual(4, t_system.missionTimeSaved);
+    }
 }
