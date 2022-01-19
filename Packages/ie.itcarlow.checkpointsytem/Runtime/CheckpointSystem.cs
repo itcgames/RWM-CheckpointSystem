@@ -36,6 +36,13 @@ public class CheckpointSystem : MonoBehaviour
     public bool autoSave = false;
     public int timesSaved = 0;
 
+    bool missionHappening;
+    int taskSaveInterval = 0;
+    int currentTaskNum = 0;
+    int tasksFinished = 0;
+    int missionTaskNum = 0;
+    public int missionTimeSaved = 0;
+
     public void Awake()
     {
         filename = Application.dataPath + "playerData.txt";
@@ -58,6 +65,11 @@ public class CheckpointSystem : MonoBehaviour
         if(autoSaveEnabled)
         {
             AutoSave();
+        }
+
+        if (missionHappening)
+        {
+            MissionSave();
         }
     }
 
@@ -144,6 +156,45 @@ public class CheckpointSystem : MonoBehaviour
             autoSave = true;
             timesSaved++;
             SaveDataToFile();
+        }
+    }
+
+    public void MissionInProgress(bool enable)
+    {
+        missionHappening = enable;
+    }
+
+    public void TaskSaveInterval(int taskNum)
+    {
+        taskSaveInterval = taskNum;
+    }
+
+    public void IncrementCurrentTaskNum()
+    {
+        currentTaskNum++;
+        tasksFinished++;
+    }
+
+    public void MissionTaskNum(int taskNum)
+    {
+        missionTaskNum = taskNum;
+    }
+
+    void MissionSave()
+    {
+        if (currentTaskNum == taskSaveInterval)
+        {
+            SaveDataToFile();
+            currentTaskNum = 0;
+            missionTimeSaved++;
+        }
+        if (tasksFinished >= missionTaskNum)
+        {
+            SaveDataToFile();
+            currentTaskNum = 0;
+            tasksFinished = 0;
+            MissionInProgress(false);
+            missionTimeSaved++;
         }
     }
 }
