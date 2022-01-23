@@ -424,4 +424,22 @@ public class CheckpointSystemTest
         yield return new WaitForSeconds(0.1f);
         Assert.AreEqual("Mission Two Tasks till next save: 1", t_system.missionText.text);
     }
+
+    [UnityTest]
+    public IEnumerator CheckpointTextWorks()
+    {
+        SceneManager.LoadScene(0);
+
+        yield return new WaitForSeconds(0.1f);
+
+        CheckpointCollider t_system = GameObject.FindObjectOfType<CheckpointCollider>();
+        t_system.playerPos.transform.position = new Vector3(3.35f, 0, 0);
+        yield return new WaitForSeconds(0.1f);
+        Assert.AreEqual("3.35 m", t_system.distanceText.text);
+
+        t_system.playerPos.transform.position = new Vector3(50, 0, 00);
+
+        yield return new WaitForSeconds(0.1f);
+        Assert.AreEqual(false, t_system.distanceText.IsActive());
+    }
 }

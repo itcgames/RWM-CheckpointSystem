@@ -73,3 +73,8 @@ MonoBehaviour:
   currentCheckpointTime: 10
   savePossible: 1
   t_checkpointSystem: {fileID: 0}
+  displayDistance: 1
+  showVisually: 1
+  distanceToDisplay: 10
+  playerPos: {fileID: 0}
+  distanceText: {fileID: 0}
