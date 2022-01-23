@@ -390,4 +390,56 @@ public class CheckpointSystemTest
         Assert.AreEqual(health, t_system.info.floatList.data[1]);
         Assert.AreEqual(pos, t_system.info.vector2List.data[0]);
     }
+
+    [UnityTest]
+    public IEnumerator MissionTextWorks()
+    {
+        SceneManager.LoadScene(0);
+
+        yield return new WaitForSeconds(0.1f);
+
+        CheckpointSystem t_system = GameObject.FindObjectOfType<CheckpointSystem>();
+
+        yield return new WaitForSeconds(0.1f);
+        t_system.SetMissionText("Mission Two");
+        t_system.TaskSaveInterval(4);
+        t_system.MissionTaskNum(16);
+        t_system.MissionInProgress(true);
+
+        Assert.AreEqual("Mission Two Tasks till next save: 4", t_system.missionText.text);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        Assert.AreEqual("Mission Two Tasks till next save: 3", t_system.missionText.text);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        t_system.IncrementCurrentTaskNum();
+        yield return new WaitForSeconds(0.1f);
+        Assert.AreEqual("Mission Two Tasks till next save: 1", t_system.missionText.text);
+    }
+
+    [UnityTest]
+    public IEnumerator CheckpointTextWorks()
+    {
+        SceneManager.LoadScene(0);
+
+        yield return new WaitForSeconds(0.1f);
+
+        CheckpointCollider t_system = GameObject.FindObjectOfType<CheckpointCollider>();
+        t_system.playerPos.transform.position = new Vector3(3.35f, 0, 0);
+        yield return new WaitForSeconds(0.1f);
+        Assert.AreEqual("3.35 m", t_system.distanceText.text);
+
+        t_system.playerPos.transform.position = new Vector3(50, 0, 00);
+
+        yield return new WaitForSeconds(0.1f);
+        Assert.AreEqual(false, t_system.distanceText.IsActive());
+    }
 }

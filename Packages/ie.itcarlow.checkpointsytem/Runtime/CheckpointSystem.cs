@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System;
 using System.Linq;
+using UnityEngine.UI;
 
 public class CheckpointSystem : MonoBehaviour
 {
@@ -42,6 +43,9 @@ public class CheckpointSystem : MonoBehaviour
     int tasksFinished = 0;
     int missionTaskNum = 0;
     public int missionTimeSaved = 0;
+
+    public Text missionText;
+    string missionObjective;
 
     public void Awake()
     {
@@ -162,6 +166,8 @@ public class CheckpointSystem : MonoBehaviour
     public void MissionInProgress(bool enable)
     {
         missionHappening = enable;
+        missionText.gameObject.SetActive(true);
+        UpdateMissionText();
     }
 
     public void TaskSaveInterval(int taskNum)
@@ -173,6 +179,7 @@ public class CheckpointSystem : MonoBehaviour
     {
         currentTaskNum++;
         tasksFinished++;
+        UpdateMissionText();
     }
 
     public void MissionTaskNum(int taskNum)
@@ -186,6 +193,7 @@ public class CheckpointSystem : MonoBehaviour
         {
             SaveDataToFile();
             currentTaskNum = 0;
+            UpdateMissionText();
             missionTimeSaved++;
         }
         if (tasksFinished >= missionTaskNum)
@@ -194,7 +202,19 @@ public class CheckpointSystem : MonoBehaviour
             currentTaskNum = 0;
             tasksFinished = 0;
             MissionInProgress(false);
+            UpdateMissionText();
+            missionText.gameObject.SetActive(false);
             missionTimeSaved++;
         }
+    }
+
+    public void SetMissionText(string t_str)
+    {
+        missionObjective = t_str;
+    }
+
+    void UpdateMissionText()
+    {
+        missionText.text = missionObjective + " Tasks till next save: " + (taskSaveInterval - currentTaskNum).ToString();
     }
 }
